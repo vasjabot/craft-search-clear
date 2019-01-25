@@ -11,6 +11,7 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 ?>
+
 <?
 if (isset($_GET['q']))
 	if (preg_match("/[a-zа-яё]/u",iconv('windows-1251','UTF-8',$_GET['q']))===1) {

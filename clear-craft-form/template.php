@@ -13,25 +13,58 @@
 ?>
 
 <?
+
+
+
+
+//echo '<pre>';
+//print_r($_GET['PAGEN_1']);
+//echo '</pre>';
+
+
+//echo '<pre>';
+//print_r(iconv('windows-1251','UTF-8',$_GET['q']));
+//echo '</pre>';
+
+
+
+
+//looks like dead code
 if (isset($_GET['q']))
 	if (preg_match("/[a-zР°-СЏС‘]/u",iconv('windows-1251','UTF-8',$_GET['q']))===1) {
+
+		echo '<pre>';
+		print_r($_GET['q']);
+		echo '</pre>';
+
+
 		$url = 'Location: ' . $_SERVER['SCRIPT_URL'] . '?q=' . urlencode(mb_strtoupper($_GET['q'], 'windows-1251'));
 		if (isset($_GET['PAGEN_1']))
 			$url .= '&PAGEN_1=' . $_GET['PAGEN_1'];
 		header('HTTP/1.1 301 Moved Permanently');
 		header($url);
 	}
-$arResult["REQUEST"]["QUERY"] = mb_strtoupper($arResult["REQUEST"]["QUERY"], 'windows-1251');
-$phrase  = $arResult["REQUEST"]["QUERY"];
-//$healthy = array("Аккумулятор ", "аккумулятор ", "Аккумулятор", "аккумулятор", "для ", "для");
-//$yummy   = array("", "", "", "", "", "");
-//$healthy = array("А", "а", "к", "у", "л", "м", "я", "т", "о", "р", "р ", "д", "я ");
-//$yummy   = array("", "", "", "", "", "", "", "", "", "", "", "", "");
+//END OF dead code
 
-//$newphrase = str_replace($healthy, $yummy, $phrase);
+
+//Prepare to META
+$arResult["REQUEST"]["QUERY"] = mb_strtoupper($arResult["REQUEST"]["QUERY"], 'windows-1251');
+//echo '<pre>';
+//print_r($arResult["REQUEST"]["QUERY"]);
+//echo '</pre>';
+$phrase  = $arResult["REQUEST"]["QUERY"];
 $newphrase = preg_replace("![А-Яа-я]!i", '', $phrase);
+//echo '<pre>';
+//print_r($newphrase);
+//echo '</pre>';
+//END OF Prepare to META
 ?>
+
+
+
+
 <?
+//META
 if (is_object($arResult["NAV_RESULT"])) {
 	$title = "Аккумулятор ".$newphrase."";
 	$description = "Аккумуляторы CRAFTMANN ".$newphrase." полностью совместимы и взаимозаменяемы с аккумуляторами, установленными в мобильные устройства. Подобрать аккумулятор по марке мобильного устройства также можно в каталоге аккумуляторов. ";
@@ -41,14 +74,34 @@ if (is_object($arResult["NAV_RESULT"])) {
 	$description = "Если обычный поиск по названию устройства не дал результатов, то рекомендуем воспользоваться поиском по артикулу или оригинальному коду.";
 	$keywords = "найти подобрать поиск аккумулятор модель совместимость акб";
 }
-//Произведен поиск аккумулятора [BL-5C] по нашей информационной базе. Много лет мы занимаемся сбором информации, проверкой и установкой совместимости аккумуляторов для различных мобильных устройств.
 $APPLICATION->SetPageProperty("keywords", "$keywords");
 $APPLICATION->SetPageProperty("description", "$description");
-$APPLICATION->SetPageProperty("title", $title);?>
+$APPLICATION->SetPageProperty("title", $title);
+//END OF META
+?>
+
+
+
+
+
+
+
 <?$Prefix = "Аккумулятор для " . " ";?>
 <div class="search-page">
 
 <?
+
+//echo '<pre>';
+//don't understand what is NAV_RESULT. ALWAYS is 1
+//print_r(is_object($arResult["NAV_RESULT"]));
+//echo '</pre>';
+
+//echo '<pre>';
+//print_r(count($arResult["SEARCH"]));
+//echo '</pre>';
+
+
+//Setting h1
 if ((count($arResult["SEARCH"])>0) and (is_object($arResult["NAV_RESULT"]))) {
 	echo "<h1>Результат поиска: ";  echo $arResult["REQUEST"]["QUERY"]; echo "</h1>";
 } elseif (count($arResult["SEARCH"])==0 and is_object($arResult["NAV_RESULT"])) {
@@ -56,23 +109,42 @@ if ((count($arResult["SEARCH"])>0) and (is_object($arResult["NAV_RESULT"]))) {
 } else {
 	echo "<h1>Поиск аккумулятора</h1>";
 }
+//END of Setting h1
+
 ?>
+
+
+
 <?
+//don't understand what is NAV_RESULT. ALWAYS is 1
 if (is_object($arResult["NAV_RESULT"])) {
+	//echo '<pre>';
+	//print_r(is_object($arResult["NAV_RESULT"]));
+	//echo '</pre>';
 	echo "<div class=\"search-advanced\">";
 	//echo GetMessage("CT_BSP_FOUND"); 
 	//echo ": "; 
 	//echo $arResult["NAV_RESULT"]->SelectedRowsCount(); 
 	echo "</div></div>";
-echo "<div style=\"float:right;width:400px;padding-top:5px;\">";
+	echo "<div style=\"float:right;width:400px;padding-top:5px;\">";
 	echo "<div class=\"clear\"></div>";
 ?>
+
+
+
 <?if(count($arResult["SEARCH"])>0):?>
 <img alt="База совместимости позволяет сократить время на поиск аккумулятора (акб) <?=$newphrase;?>" src="/upload/medialibrary/423/Add_compatibility+800.jpg" title="Добавление совместимости аккумуляторов <?=$newphrase;?>" style="margin-left: 0;width: 400px;" align="right">
 <?
 	echo "<p style=\"color: #353535;margin-left: 20px;\">Произведен поиск аккумулятора <b>";  echo $newphrase; echo "</b> по нашей информационной базе. Много лет мы занимаемся сбором информации, проверкой и установкой <a href=\"/technology/compatibility/\"><b class=\"seo\">совместимости аккумуляторов</b></a> для различных мобильных устройств. Подобрать аккумулятор по марке мобильного устройства также можно в <a href=\"/akkumulyator/\">каталоге аккумуляторов</a>. Мы будем благодарны, если вы сообщите об ошибке или об установленной вами совместимости. Эта информация поможет другим людям быстрее и правильнее подобрать аккумулятор для своего устройства.</p><br>";
 ?>
-<?$APPLICATION->IncludeComponent(
+
+
+
+
+
+<?
+	/*СинЯЯ кнопка ДОБАВИТЬ(исправить) СОВМЕСТИМОСТЬ*/
+$APPLICATION->IncludeComponent(
 	"bitrix:form.result.new", 
 	"compatibility",
 	array(
@@ -103,40 +175,60 @@ echo "<div style=\"float:right;width:400px;padding-top:5px;\">";
 	),
 	false
 );
+
 ?>
-<?else:?>
+
+
+
+	<?else://if(count($arResult["SEARCH"])>0):?>
+
+
+
+
 <img alt="Если поиск аккумулятора по модели, артикулу и оригинальному коду не дал результатов, отправьте сообщение через форму обратной связи." src="/upload/medialibrary/d68/out_of_stock+.jpg" title="Аккумулятор не найден. Попробуйте изменить условия поиска." width="400" height="300" style="margin-top: 0;">
 <div style="width:400px;margin-left: 20px;">
-<?$APPLICATION->IncludeComponent(
-	"bitrix:form.result.new", 
-	"notfound", 
-	array(
-		"CACHE_TIME" => "1780",
-		"CACHE_TYPE" => "A",
-		"CHAIN_ITEM_LINK" => "",
-		"CHAIN_ITEM_TEXT" => "",
-		"COMPONENT_TEMPLATE" => "notfound",
-		"COMPOSITE_FRAME_MODE" => "A",
-		"COMPOSITE_FRAME_TYPE" => "AUTO",
-		"EDIT_URL" => "",
-		"IGNORE_CUSTOM_TEMPLATE" => "N",
-		"LIST_URL" => "",
-		"MARK_NAME" => "",
-		"MODEL_NAME" => "",
-		"SEF_FOLDER" => "/akkumulyator/apple/",
-		"SEF_MODE" => "N",
-		"SUCCESS_URL" => "",
-		"USE_EXTENDED_ERRORS" => "N",
-		"WEB_FORM_ID" => "3",
-		"VARIABLE_ALIASES" => array(
-			"WEB_FORM_ID" => "WEB_FORM_ID",
-			"RESULT_ID" => "RESULT_ID",
-		)
-	),
-	false
-);?>
+	<?
+	/*СинЯЯ кнопка ДОБАВИТЬ(исправить) СОВМЕСТИМОСТЬ*/
+	$APPLICATION->IncludeComponent(
+		"bitrix:form.result.new", 
+		"notfound", 
+		array(
+			"CACHE_TIME" => "1780",
+			"CACHE_TYPE" => "A",
+			"CHAIN_ITEM_LINK" => "",
+			"CHAIN_ITEM_TEXT" => "",
+			"COMPONENT_TEMPLATE" => "notfound",
+			"COMPOSITE_FRAME_MODE" => "A",
+			"COMPOSITE_FRAME_TYPE" => "AUTO",
+			"EDIT_URL" => "",
+			"IGNORE_CUSTOM_TEMPLATE" => "N",
+			"LIST_URL" => "",
+			"MARK_NAME" => "",
+			"MODEL_NAME" => "",
+			"SEF_FOLDER" => "/akkumulyator/apple/",
+			"SEF_MODE" => "N",
+			"SUCCESS_URL" => "",
+			"USE_EXTENDED_ERRORS" => "N",
+			"WEB_FORM_ID" => "3",
+			"VARIABLE_ALIASES" => array(
+				"WEB_FORM_ID" => "WEB_FORM_ID",
+				"RESULT_ID" => "RESULT_ID",
+			)
+		),
+		false
+	);?>
 </div>
-<?endif;?>
+	<?endif;//if(count($arResult["SEARCH"])>0):?>
+
+
+
+
+
+
+
+
+
+
 <?
 echo "</div>";
 } else {
@@ -147,12 +239,37 @@ echo "</div>";
  <br>";
 }
 ?>
-<?if(isset($arResult["REQUEST"]["ORIGINAL_QUERY"])):
-	?>
+
+
+
+
+
+
+
+
+
+<?
+//echo '<pre>';
+//print_r($arResult["REQUEST"]["ORIGINAL_QUERY"]);
+//echo '</pre>';
+
+if(isset($arResult["REQUEST"]["ORIGINAL_QUERY"])):
+?>
 	<div class="search-language-guess">
 		<?echo GetMessage("CT_BSP_KEYBOARD_WARNING", array("#query#"=>'<a href="'.$arResult["ORIGINAL_QUERY_URL"].'">'.$arResult["REQUEST"]["ORIGINAL_QUERY"].'</a>'))?>
 	</div><br />
-<?endif;?>
+
+
+
+
+
+	<?endif;//FROM WHICH if statement????????????????????????>
+
+
+
+
+
+
 
 	<div class="search-result" style="width: 55%;display: table;">
 	<?if($arResult["REQUEST"]["QUERY"] === false && $arResult["REQUEST"]["TAGS"] === false):?>
@@ -160,36 +277,53 @@ echo "</div>";
 
 	<?elseif(count($arResult["SEARCH"])>0):?>
 		<?if($arParams["DISPLAY_TOP_PAGER"] != "N") echo $arResult["NAV_STRING"]?>
+
+
+
 <?
 $Prototypes = count($arResult["SEARCH"]);
 //echo '<pre>';
-//print_r($arResult["SEARCH"]);
+//print_r(count($arResult["SEARCH"]));// == PAGENATION
 //echo '</pre>';
 ?>
 
+
+
+
+
+
+
+
+
+
+
 		<?foreach($arResult["SEARCH"] as $arItem):?>
+		<?
+			//TITLE_FORMATED FOR BLC-2 NOKIA 3310
+			//print_r($arItem);
+	//echo '<pre>';
+	//print_r($arItem);
+			//print_r($arItem[TITLE_FORMATED]);
+//echo '<pre>';
+//echo '<pre>';
+//print_r($arItem['ITEM_ID']);
+//echo '<pre>';
+		?>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <?
-
-//$grab_elem = GetIBlockElement($arItem["ITEM_ID"]);
-
-//$GLOBAL_IBLOCK_ID = 12;
-
-//$arFilter = array('IBLOCK_ID' => $GLOBAL_IBLOCK_ID);
-//$rsSections = CIBlockSection::GetList(array(), $arFilter);
-//while ($arSection = $rsSections->Fetch())
-//{
-//$str_one = mb_strtoupper($arSection['SEARCHABLE_CONTENT']);
-	//echo '<pre>';
-	//var_dump($ar_res['DEPTH_LEVEL']);
-	//echo '</pre>';
-//}
-
-	//echo '<pre>';
-	//print_r($arItem["TITLE"]);
-	//echo '</pre>';
-
-
 $arItem['ITEM_ID'] = substr($arItem['ITEM_ID'],1);
 
 //echo '<pre>';
@@ -210,14 +344,13 @@ if($ar_res = $res->GetNext())
 	{
 		//echo '<pre>';
 		//print_r($ar_res_inside['NAME']);
+		//$brand_name = $ar_res_inside['NAME'];
 		//echo '</pre>';
 	}
 
 }
-
-
-
 ?>
+
 <?
 $list = $ar_res["ID"];
 $activeElements = CIBlockSection::GetSectionElementsCount($list);
@@ -236,13 +369,17 @@ else {
 }*/
 $PrototypesShow = $Prototypes-$activeElements;
 if ($Prototypes==1){
-LocalRedirect($arItem["URL"], false, '301 Moved permanently');
+	LocalRedirect($arItem["URL"], false, '301 Moved permanently');
 }
+
+
 if ($PrototypesShow==0){
-LocalRedirect($arItem["URL"], false, '301 Moved permanently');
+	LocalRedirect($arItem["URL"], false, '301 Moved permanently');
 }
+
 $Producer=$ar_res['DEPTH_LEVEL'];
 ?>
+
 <?/*
 echo "PrototypesShow ";
 echo ($PrototypesShow);
@@ -337,6 +474,13 @@ $image = CFile::GetPath($ar_res["PICTURE"]);
 		</tr>
 	</tbody>
 </table>
+
+
+
+
+
+
+
 	<?$APPLICATION->IncludeComponent(
 	"bitrix:catalog.section", 
 	"search", 
@@ -470,6 +614,8 @@ $image = CFile::GetPath($ar_res["PICTURE"]);
 );?>
 </div>
 <?endif?>
+
+
 		<?endforeach;?>
 		<?if($arParams["DISPLAY_BOTTOM_PAGER"] != "N") echo $arResult["NAV_STRING"]?>
 		<?if($arParams["SHOW_ORDER_BY"] != "N"):?>

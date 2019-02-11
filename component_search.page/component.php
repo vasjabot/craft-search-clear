@@ -325,6 +325,12 @@ if($this->InitComponentTemplate($templatePage))
 
 
 
+// сортируем наш массив по сортировке на увеличение
+function funSortbySort($a, $b) 
+{
+	if ($a['SORT'] === $b['SORT']) return 0;
+	return $a['SORT'] > $b['SORT'] ? -1 : 1;
+}
 
 
  // МОЯ СОРТИРОВКА ПО СОРТИРОВКЕ!!!!
@@ -414,12 +420,6 @@ if (empty($arResultAll))
 
 
 
-     // сортируем наш массив по сортировке на увеличение
-	 function funSortbySort($a, $b) 
-	{
-		if ($a['SORT'] === $b['SORT']) return 0;
-		return $a['SORT'] > $b['SORT'] ? -1 : 1;
-	}
 
 
 uasort($arResultAll, 'funSortbySort');

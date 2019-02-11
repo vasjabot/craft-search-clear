@@ -11,9 +11,176 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 ?>
-
 <?
 
+
+//echo "</pre>";
+//print_r($arResult);
+//print_r($arResult["REQUEST"]["HOW"]);
+//print_r($arResult["REQUEST"]);
+//print_r("ÃŒﬂ —Œ–“»–Œ¬ ¿ œŒ —Œ–“»–Œ¬ ≈!!!!");
+//print_r($arParams["DEFAULT_SORT"]);
+//echo "</pre>";
+
+
+/*foreach($arResult as $key => $value)
+{
+	if($key=="NAV_RESULT")
+	{
+		foreach($value as $key_in => $value_in)
+		{
+			if($key_in=="arResult")
+			{
+				foreach($value_in as $key_in_in => $value_in_in)
+				{
+					echo nl2br("\r\n");
+					echo "</pre>";
+					print_r($key_in_in);
+					echo nl2br("\r\n");
+					echo "</pre>";
+					print_r($value_in_in);
+					echo nl2br("\r\n");
+					echo "</pre>";
+				}
+			}
+		}
+	}
+
+}
+*/
+
+/*
+foreach($arResult as $key => $value)
+{
+
+	//echo nl2br("\r\n");
+	//echo "</pre>";
+	//print_r($key);
+	//echo nl2br("\r\n");
+	//echo "</pre>";
+	//print_r($value);
+	//echo nl2br("\r\n");
+	//echo "</pre>";
+
+
+}
+*/
+
+
+/*
+foreach($arResult as $key => $value)
+{
+	echo nl2br("\r\n");
+	echo "</pre>";
+	print_r($key);
+	echo nl2br("\r\n");
+	echo "</pre>";
+	print_r($value);
+	echo nl2br("\r\n");
+	echo "</pre>";
+
+	if($key=="SEARCH")
+	{
+		foreach($value as $key_in => $value_in)
+		{
+
+					echo nl2br("\r\n");
+					echo "</pre>";
+			print_r($key_in);
+					echo nl2br("\r\n");
+					echo "</pre>";
+			print_r($value_in);
+					echo nl2br("\r\n");
+					echo "</pre>";
+
+			foreach($value_in as $key_in_in => $value_in_in)
+			{
+					echo nl2br("\r\n");
+					echo "</pre>";
+					print_r($key_in_in);
+					echo nl2br("\r\n");
+					echo "</pre>";
+					print_r($value_in_in);
+					echo nl2br("\r\n");
+					echo "</pre>";
+					if($key_in_in == "ITEM_ID")
+					{
+						$search_ID = mb_substr( strval($value_in_in), 1);
+						print_r(IntVal($search_ID));
+						echo nl2br("\r\n");
+					}
+			}
+
+		}
+	}
+
+}
+*/
+
+/*
+$arSelect = Array("ID", "SORT", "CODE");
+$arFilter = Array("IBLOCK_ID"=>IntVal(12), "ID"=>IntVal(66466));
+$resSection = \CIBlockSection::GetList(Array(), $arFilter, false, $arSelect);
+
+//if(1)
+if ( $arSection = $resSection->fetch() )
+			{
+				echo "</pre>";
+				print_r($arSection);
+				echo nl2br("\r\n");
+				print_r($arSection['CODE']);
+				echo nl2br("\r\n");
+				echo "</pre>";
+				echo "</pre>";
+				print_r($arSection['SORT']);
+				echo nl2br("\r\n");
+				echo "</pre>";
+
+				$search_ID = mb_substr( "S66462" , 1);
+				print_r($search_ID);
+				echo nl2br("\r\n");
+
+			}
+else
+{
+echo "</pre>";
+					print_r("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+					echo nl2br("\r\n");
+					echo "</pre>";
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//foreach($arResult["REQUEST"]["HOW"] as $key => $value)
+//{
+//echo "</pre>";
+//print_r($key);
+//echo nl2br("\r\n");
+//print_r($value);
+//echo nl2br("\r\n");
+//echo "</pre>";
+
+//}
 
 
 
@@ -118,13 +285,13 @@ if ((count($arResult["SEARCH"])>0) and (is_object($arResult["NAV_RESULT"]))) {
 <?
 //don't understand what is NAV_RESULT. ALWAYS is 1
 if (is_object($arResult["NAV_RESULT"])) {
-	//echo '<pre>';
-	//print_r(is_object($arResult["NAV_RESULT"]));
-	//echo '</pre>';
+	echo '<pre>';
+	print_r(is_object($arResult["NAV_RESULT"]));
+	echo '</pre>';
 	echo "<div class=\"search-advanced\">";
-	//echo GetMessage("CT_BSP_FOUND"); 
-	//echo ": "; 
-	//echo $arResult["NAV_RESULT"]->SelectedRowsCount(); 
+	echo GetMessage("CT_BSP_FOUND"); 
+	echo ": "; 
+	echo $arResult["NAV_RESULT"]->SelectedRowsCount(); 
 	echo "</div></div>";
 	echo "<div style=\"float:right;width:400px;padding-top:5px;\">";
 	echo "<div class=\"clear\"></div>";
@@ -374,7 +541,7 @@ if ($Prototypes==1){
 
 
 if ($PrototypesShow==0){
-	LocalRedirect($arItem["URL"], false, '301 Moved permanently');
+	//LocalRedirect($arItem["URL"], false, '301 Moved permanently');
 }
 
 $Producer=$ar_res['DEPTH_LEVEL'];
